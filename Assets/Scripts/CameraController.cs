@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class CameraController : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class CameraController : MonoBehaviour
     public float rotationSpeed;
     public float moveSpeed;
     public Transform target;
+    public List<Transform> cameras;
 
     private Vector3 lastMousePos;
     private Vector3 mousePos;
@@ -42,7 +44,42 @@ public class CameraController : MonoBehaviour
             lastMousePos = Input.mousePosition;
         }
 
+        //x
+        if (Input.GetMouseButtonUp(1))
+        {
+            int[] temps = { -270, -180, -90, 0, 90, 180, 270 };
 
+            foreach (var temp in temps)
+            {
+                if (Mathf.Abs(this.transform.eulerAngles.y - temp) <= 45)
+                {
+                    switch(temp)
+                    {
+                        case -270:
+                        case 90:
+                            this.transform.position = cameras[1].position;
+                            this.transform.rotation = cameras[1].rotation;
+                            break;
+                        case -180:
+                        case 180:
+                            this.transform.position = cameras[2].position;
+                            this.transform.rotation = cameras[2].rotation;
+                            break;
+                        case -90:
+                        case 270:
+                            this.transform.position = cameras[3].position;
+                            this.transform.rotation = cameras[3].rotation;
+                            break;
+                        case 0:
+                            this.transform.position = cameras[0].position;
+                            this.transform.rotation = cameras[0].rotation;
+                            break;
+                    }
+                }
+            }
+        }
+
+        //y
         if (Input.GetMouseButtonDown(0))
         {
             mousePos = Input.mousePosition;
