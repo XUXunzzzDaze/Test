@@ -44,8 +44,7 @@ public class CameraController : MonoBehaviour
             lastMousePos = Input.mousePosition;
         }
 
-        //x
-        if (Input.GetMouseButtonUp(1))
+        //if (Input.GetMouseButtonUp(1))
         {
             int[] temps = { -270, -180, -90, 0, 90, 180, 270 };
 
@@ -78,6 +77,8 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
+
+
 
         //y
         if (Input.GetMouseButtonDown(0))
